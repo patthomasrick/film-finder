@@ -4,11 +4,16 @@ import java.util.Scanner;
 
 public class OmniSearch {
     public static void main(String args[]) {
+
+        System.out.println("Film Finder Search Test\nPatrick Thomas\nType a query and press enter to search.");
+
         Scanner reader = new Scanner(System.in);  // Reading from System.in
         RottenTomatoes rt = new RottenTomatoes();
 
         while (true) {
-            String s = reader.next(); // Scans the next token of the input as an int.
+            System.out.printf("\n\t>\t");
+            String s = reader.nextLine();
+            s = s.replace(" ", "%20").trim();
             if (s.equals("quit")) break;
             else rt.search(s);
         }

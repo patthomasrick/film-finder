@@ -8,10 +8,23 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
+/**
+ * @author Patrick Thomas
+ *
+ * Hooks are the overarching style of how data will be scraped from webpages.
+ */
 public abstract class Hook {
+    /**
+     * Given an URL, download the website's source.
+     *
+     * @param strUrl the website to download's URL as a string
+     * @return string of entire webpage's source
+     */
     public static String retrieveWebsite(String strUrl) {
         URL url;
-        StringBuilder out = new StringBuilder();
+        StringBuilder out;
+
+        out = new StringBuilder();
 
         try {
             // get URL content
@@ -23,23 +36,26 @@ public abstract class Hook {
                     new InputStreamReader(connection.getInputStream()));
 
             String inputLine;
-
             while ((inputLine = br.readLine()) != null) {
                 out.append(inputLine);
                 out.append("\n");
             }
 
             br.close();
-
-            System.out.println("Done");
-
         } catch (IOException e) {
+            // in the event of the url not being valid
             e.printStackTrace();
         }
 
         return out.toString();
     }
 
+    /**
+     * This is the hook's main way of giving data back to who requested the search.
+     *
+     * @param query string to enter into a webpage's search, such as "shrek" or "star wars"
+     * @return ArrayList of all search results scraped from the webpage
+     */
     public ArrayList<SearchResult> search(String query) {
         return null;
     }
