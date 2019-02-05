@@ -15,12 +15,26 @@ import java.util.concurrent.Callable;
  */
 public abstract class Hook implements Callable<List<SearchResult>> {
     /**
+     * String to search for when called.
+     */
+    private String query;
+
+    /**
+     * Default constructor. Takes a query.
+     *
+     * @param query String to search the implemented web page for.
+     */
+    public Hook(String query) {
+        this.query = query;
+    }
+
+    /**
      * Given an URL, download the website's source.
      *
      * @param strUrl the website to download's URL as a string
      * @return string of entire webpage's source
      */
-    public static String retrieveWebsite(String strUrl) {
+    static String retrieveWebsite(String strUrl) {
         URL url;
         StringBuilder out;
 
@@ -58,6 +72,16 @@ public abstract class Hook implements Callable<List<SearchResult>> {
      */
     public List<SearchResult> search(String query) {
         return null;
+    }
+
+
+    /**
+     * Implementation of Callable. Simply uses Hook.search().
+     *
+     * @return List of SearchResults.
+     */
+    public List<SearchResult> call() {
+        return search(query);
     }
 
 }
