@@ -68,4 +68,9 @@ public class SearchResult {
     public String getSiteLink(String platform) {
         return this.siteLinks.get(platform);
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s, %s", this.query, this.queryUrl);
+    }
 }
