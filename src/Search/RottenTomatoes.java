@@ -41,7 +41,7 @@ public class RottenTomatoes extends Hook {
             ArrayList<String> jsonArray = new ArrayList<>();
 
             // split that string by the JSON parts
-            int numOpeningBrackets = 0, startIndex = 0, endIndex = 0;
+            int numOpeningBrackets = 0, startIndex = 0, endIndex;
             for (int i = 0; i < jsonConcat.length(); i++) {
                 char c = jsonConcat.charAt(i);
                 if (c == '{') {
@@ -60,8 +60,7 @@ public class RottenTomatoes extends Hook {
             // parse json
             ArrayList<SearchResult> out;
             Scanner scanner;
-            int start, end;
-            System.out.println("FOUND RESULTS:");
+            // System.out.println("FOUND RESULTS:");
             for (String s : jsonArray) {
                 scanner = new Scanner(s);
                 String name, url;
@@ -75,7 +74,11 @@ public class RottenTomatoes extends Hook {
                 url = movieUrl + scanner.findInLine("[^\"]+");
                 // System.out.printf("%s, %d, %s\n", name, year, url);
 
-                outList.add(new SearchResult(name, url, null, null));
+                outList.add(new SearchResult(
+                        String.format("%s (%d)", name, year),
+                        url,
+                        null,
+                        null));
             }
         }
         // return found list, may be empty

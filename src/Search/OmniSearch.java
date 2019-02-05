@@ -1,6 +1,8 @@
 package Search;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -16,7 +18,7 @@ public class OmniSearch {
         OmniSearch searcher = new OmniSearch();
 
         while (true) {
-            System.out.printf("\n\t>\t");
+            System.out.print("\n\t>\t");
             String s = reader.nextLine();
             s = s.replace(" ", "%20").trim();
             if (s.equals("quit")) break;
@@ -29,27 +31,29 @@ public class OmniSearch {
 
     public List<SearchResult> search(String query) {
         List<Hook> hookList = new ArrayList<>();
-        Set<SearchResult> allResults = new HashSet<>();
+        List<SearchResult> allResults = new ArrayList<>();
         ExecutorService service = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
         // add search hooks
         hookList.add(new RottenTomatoes(query));
 
         // try to invoke all search threads at once
-        List<SearchResult> outList = new ArrayList<>();
         try {
             List<Future<List<SearchResult>>> futures = service.invokeAll(hookList);
             for (Future<List<SearchResult>> futureList : futures) {
                 List<SearchResult> srList = futureList.get();
-                outList.addAll(srList);
+                allResults.addAll(srList);
             }
-
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 
         service.shutdown();
 
-        return outList;
+        for (SearchResult searchResult : allResults) {
+            System.out.println(searchResult.toString());
+        }
+
+        return allResults;
     }
 }
