@@ -1,9 +1,8 @@
-package Search.Searchers;
+package Search;
 
-import javax.naming.directory.SearchResult;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class RottenTomatoes extends Hook {
     private static String searchUrl = "https://www.rottentomatoes.com/search/?search=";
@@ -11,8 +10,25 @@ public class RottenTomatoes extends Hook {
     private static String subStrStart = "\"movies\":";
     private static String subStrEnd = ",\"tvCount\":";
 
+    /**
+     * Variable to store the search query so this can be threaded.
+     */
+    private String query;
+
+    /**
+     * Default constructor. Takes the query.
+     *
+     * @param query String to search webpage for.
+     */
+    public RottenTomatoes(String query) {
+        this.query = query;
+    }
+
     @Override
-    public ArrayList<SearchResult> search(String query) {
+    public List<SearchResult> search(String query) {
+        // output search results
+        List<SearchResult> outList = new ArrayList<>();
+
         // get the source of the website
         String source = Hook.retrieveWebsite(String.format("%s%s", searchUrl, query));
 
@@ -57,15 +73,17 @@ public class RottenTomatoes extends Hook {
                 year = Integer.parseInt(scanner.findInLine("[^,]+"));
                 scanner.skip(",\"url\":\"");
                 url = movieUrl + scanner.findInLine("[^\"]+");
-                System.out.printf("%s, %d, %s\n", name, year, url);
+                // System.out.printf("%s, %d, %s\n", name, year, url);
+
+                outList.add(new SearchResult(name, url, null, null));
             }
-            System.out.println("DONE");
         }
-        return null;
+        // return found list, may be empty
+        return outList;
     }
 
-    public static void main(String args[]) {
-        RottenTomatoes rt = new RottenTomatoes();
-        rt.search("shrek");
+    @Override
+    public List<SearchResult> call() {
+        return this.search(query);
     }
 }

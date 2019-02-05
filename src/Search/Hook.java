@@ -1,19 +1,19 @@
-package Search.Searchers;
+package Search;
 
-import javax.naming.directory.SearchResult;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
 
 /**
  * @author Patrick Thomas
- *
+ * <p>
  * Hooks are the overarching style of how data will be scraped from webpages.
  */
-public abstract class Hook {
+public abstract class Hook implements Callable<List<SearchResult>> {
     /**
      * Given an URL, download the website's source.
      *
@@ -56,7 +56,7 @@ public abstract class Hook {
      * @param query string to enter into a webpage's search, such as "shrek" or "star wars"
      * @return ArrayList of all search results scraped from the webpage
      */
-    public ArrayList<SearchResult> search(String query) {
+    public List<SearchResult> search(String query) {
         return null;
     }
 

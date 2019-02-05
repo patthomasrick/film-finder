@@ -12,22 +12,22 @@ public class SearchResult {
     /**
      * The movie's title, such as "Shrek II"
      */
-    private final String query;
+    private String query;
 
     /**
      * The URL returned from the search. This should go to the movie's webpage on a site.
      */
-    private final String queryUrl;
+    private String queryUrl;
 
     /**
      * Sites that a movie is found available on.
      */
-    private final TreeSet<String> availability;
+    private TreeSet<String> availability = null;
 
     /**
      * Mapping of available site to link to respective site.
      */
-    private final HashMap<String, String> siteLinks;
+    private HashMap<String, String> siteLinks = null;
 
     /**
      * Constructor.
@@ -41,8 +41,8 @@ public class SearchResult {
                         HashMap<String, String> siteLinks) {
         this.query = query;
         this.queryUrl = queryUrl;
-        this.availability = new TreeSet<>(availability);
-        this.siteLinks = new HashMap<>(siteLinks);
+        if (availability != null) this.availability = new TreeSet<>(availability);
+        if (siteLinks != null) this.siteLinks = new HashMap<>(siteLinks);
     }
 
     /**
