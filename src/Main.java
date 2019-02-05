@@ -1,5 +1,5 @@
 /**
- * Peter Sepulvida and Patrick Thomas
+ * Peter Sepulveda and Patrick Thomas
  */
 
 public class Main {
