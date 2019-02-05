@@ -1,9 +1,11 @@
-package Search.Searchers;
+package Search;
+
+import Search.Searchers.RottenTomatoes;
 
 import java.util.Scanner;
 
 public class OmniSearch {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         System.out.println("Film Finder Search Test\nPatrick Thomas\nType a query and press enter to search.");
 
