@@ -11,17 +11,11 @@ public class RottenTomatoes extends Hook {
     private static String subStrEnd = ",\"tvCount\":";
 
     /**
-     * Variable to store the search query so this can be threaded.
-     */
-    private String query;
-
-    /**
-     * Default constructor. Takes the query.
-     *
-     * @param query String to search webpage for.
+     * Simply use Hook's default constructor.
+     * @param query String to search for.
      */
     public RottenTomatoes(String query) {
-        this.query = query;
+        super(query);
     }
 
     @Override
@@ -51,7 +45,7 @@ public class RottenTomatoes extends Hook {
                     numOpeningBrackets--;
                     if (numOpeningBrackets == 0) {
                         endIndex = i;
-                        jsonArray.add(jsonConcat.substring(startIndex, endIndex+1));
+                        jsonArray.add(jsonConcat.substring(startIndex, endIndex + 1));
                         // System.out.println(jsonConcat.substring(startIndex, endIndex+1));
                     }
                 }
@@ -83,10 +77,5 @@ public class RottenTomatoes extends Hook {
         }
         // return found list, may be empty
         return outList;
-    }
-
-    @Override
-    public List<SearchResult> call() {
-        return this.search(query);
     }
 }
