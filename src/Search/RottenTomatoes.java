@@ -5,13 +5,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class RottenTomatoes extends Hook {
-    private static String searchUrl = "https://www.rottentomatoes.com/search/?search=";
-    private static String movieUrl = "https://www.rottentomatoes.com";
-    private static String subStrStart = "\"movies\":";
-    private static String subStrEnd = ",\"tvCount\":";
+    private static final String searchUrl = "https://www.rottentomatoes.com/search/?search=";
+    private static final String movieUrl = "https://www.rottentomatoes.com";
+    private static final String subStrStart = "\"movies\":";
+    private static final String subStrEnd = ",\"tvCount\":";
 
     /**
      * Simply use Hook's default constructor.
+     *
      * @param query String to search for.
      */
     public RottenTomatoes(String query) {
@@ -20,6 +21,9 @@ public class RottenTomatoes extends Hook {
 
     @Override
     public List<SearchResult> search(String query) {
+        // format input string slightly so it plays nice with HTML queries
+        query = query.replace(" ", "%20").trim();
+
         // output search results
         List<SearchResult> outList = new ArrayList<>();
 
@@ -52,7 +56,6 @@ public class RottenTomatoes extends Hook {
             }
 
             // parse json
-            ArrayList<SearchResult> out;
             Scanner scanner;
             // System.out.println("FOUND RESULTS:");
             for (String s : jsonArray) {
