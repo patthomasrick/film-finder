@@ -7,31 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class OmniSearch {
-//
-//    /**
-//     * Main method to demonstrate the usable of the OmniSearch.
-//     *
-//     * @param args arguments passed to the program.
-//     */
-//    public static void main(String[] args) {
-//
-//        System.out.println("Film Finder Search Test\nPatrick Thomas\nType a query and press enter to search.");
-//
-//        Scanner reader = new Scanner(System.in);  // Reading from System.in
-//        OmniSearch searcher = new OmniSearch();
-//
-//        while (true) {
-//            System.out.print("\n\t>\t");
-//            String s = reader.nextLine();
-//            s = s.replace(" ", "%20").trim();
-//            if (s.equals("quit")) break;
-//            else searcher.search(s);
-//        }
-//
-//        // once finished
-//        reader.close();
-//    }
+public class AllSearch {
 
     /**
      * Search all configured hooks for a movie.

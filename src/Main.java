@@ -1,4 +1,4 @@
-import Search.OmniSearch;
+import Search.AllSearch;
 import Search.SearchResult;
 
 import java.util.List;
@@ -11,10 +11,10 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("OmniSearch example.");
+        System.out.println("AllSearch example.");
 
         Scanner reader = new Scanner(System.in); // reading from command line
-        OmniSearch searcher = new OmniSearch(); // create searcher
+        AllSearch searcher = new AllSearch(); // create searcher
         List<SearchResult> resultsList; // list that results will be stored in
 
         while (true) {

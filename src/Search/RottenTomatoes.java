@@ -78,6 +78,7 @@ public class RottenTomatoes extends Hook {
                         null));
             }
         }
+
         // return found list, may be empty
         return outList;
     }
