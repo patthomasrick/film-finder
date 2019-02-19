@@ -9,6 +9,9 @@ import java.util.concurrent.Future;
 
 public class AllSearch {
 
+    // array of all possible platforms currently able to be returned
+    public static final String[] allPlatforms = {"netflix", "amazon", "itunes", "fandangonow", "vudu"};
+
     /**
      * Search all configured hooks for a movie.
      *
@@ -35,11 +38,11 @@ public class AllSearch {
         }
 
         service.shutdown();
-
-        // print all of the search results found
-        for (SearchResult searchResult : allResults) {
-            System.out.println(searchResult.toString());
-        }
+//
+//        // print all of the search results found
+//        for (SearchResult searchResult : allResults) {
+//            System.out.println(searchResult.toString());
+//        }
 
         return allResults;
     }

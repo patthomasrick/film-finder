@@ -24,27 +24,24 @@ public class SearchResult {
     /**
      * Sites that a movie is found available on.
      */
-    private TreeSet<String> availabilitySet = null;
+    TreeSet<String> availabilitySet = null;
 
     /**
      * Mapping of available site to link to respective site.
      */
-    private HashMap<String, String> siteLinksMap = null;
+    HashMap<String, String> siteLinksMap = null;
 
     /**
      * Constructor.
      *
      * @param movieTitle      The movie's title
      * @param queryUrl        The movie's URL on a streaming platform
-     * @param availabilitySet The movie's availabilitySet on a streaming platform
-     * @param siteLinksMap    Mapping of platform name to link
      */
-    public SearchResult(String movieTitle, String queryUrl, TreeSet<String> availabilitySet,
-                        HashMap<String, String> siteLinksMap) {
+    public SearchResult(String movieTitle, String queryUrl) {
         this.movieTitle = movieTitle;
         this.queryUrl = queryUrl;
-        if (availabilitySet != null) this.availabilitySet = new TreeSet<>(availabilitySet);
-        if (siteLinksMap != null) this.siteLinksMap = new HashMap<>(siteLinksMap);
+        this.availabilitySet = new TreeSet<>();
+        this.siteLinksMap = new HashMap<>();
     }
 
     /**
@@ -75,9 +72,17 @@ public class SearchResult {
         return this.availabilitySet.contains(platform);
     }
 
+//    public void addAvailable(String platform) {
+//        this.availabilitySet.add(platform);
+//    }
+
     public String getSiteLink(String platform) {
         return this.siteLinksMap.get(platform);
     }
+
+//    public void addSiteLink(String platform, String url) {
+//        this.siteLinksMap.put(platform, url);
+//    }
 
     /**
      * Returns the search results in a nice, readable string format.

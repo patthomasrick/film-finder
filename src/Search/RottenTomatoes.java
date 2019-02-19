@@ -1,8 +1,15 @@
 package Search;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class RottenTomatoes extends Hook {
     private static final String searchUrl = "https://www.rottentomatoes.com/search/?search=";
@@ -71,15 +78,82 @@ public class RottenTomatoes extends Hook {
                 url = movieUrl + scanner.findInLine("[^\"]+");
                 // System.out.printf("%s, %d, %s\n", name, year, url);
 
-                outList.add(new SearchResult(
-                        String.format("%s (%d)", name, year),
-                        url,
-                        null,
-                        null));
+                outList.add(new SearchResult(String.format("%s (%d)", name, year), url));
             }
+        }
+
+        // now parse individual sites, looking for site links
+        List<RottenTomatoesSpecificSearch> callables = new ArrayList<>();
+        ExecutorService service = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+
+        for (SearchResult result : outList) {
+            callables.add(new RottenTomatoesSpecificSearch(result));
+        }
+
+        // try to invoke all search threads at once
+        try {
+            List<Future<SearchResult>> futures = service.invokeAll(callables);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
         // return found list, may be empty
         return outList;
+    }
+
+    private class RottenTomatoesSpecificSearch implements Callable<SearchResult> {
+        private final static String linkSectionStart = "<div class=\"movie_links\">";
+        private final static String linkSectionEnd = "function trackAffiliateEvent(affiliate) {";
+
+        SearchResult sr;
+
+        RottenTomatoesSpecificSearch(SearchResult sr) {
+            this.sr = sr; // intentionally use reference
+        }
+
+        @Override
+        public SearchResult call() {
+            // get the source of the website
+            String source = Hook.retrieveWebsite(this.sr.getQueryUrl());
+            BufferedReader reader = new BufferedReader(new StringReader(source));
+            String line;
+            boolean linkSectionStartFound = false;
+            List<String> foundLinks = new ArrayList<>();
+            try {
+                while (true) {
+                    line = reader.readLine();
+
+                    // loop and input control
+                    if (!linkSectionStartFound && line.contains(linkSectionStart)) {
+                        linkSectionStartFound = true;
+                    } else if (linkSectionStartFound && line.contains(linkSectionEnd)) {
+                        break;
+                    }
+
+                    // do some string parsing
+                    if (linkSectionStartFound) {
+                        // grab all links
+                        if (line.contains("http")) {
+                            String[] split = line.split("\"");
+//                            System.out.println(split[split.length - 2]);
+                            foundLinks.add(split[split.length - 2]);
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            for (String link : foundLinks) {
+                for (String platform : AllSearch.allPlatforms) {
+                    if (link.contains(platform)) {
+                        sr.availabilitySet.add(platform);
+                        sr.siteLinksMap.put(platform, link);
+                    }
+                }
+            }
+
+            return sr;
+        }
     }
 }
