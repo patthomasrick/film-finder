@@ -9,20 +9,30 @@ import java.util.Scanner;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
-public class RottenTomatoes extends Hook {
+/**
+ * This is a search hook intended to interface with RottenTomatoes' website at time of writing. Given a query, it is
+ * searched with RottenTomatoes' web search tool. Each query returned is processed in parallel to find its links to
+ * streaming platforms.
+ *
+ * @author Patrick Thomas
+ * @see Hook
+ * @see SearchResult
+ */
+class RottenTomatoes extends Hook {
     private static final String searchUrl = "https://www.rottentomatoes.com/search/?search=";
     private static final String movieUrl = "https://www.rottentomatoes.com";
     private static final String subStrStart = "\"movies\":";
     private static final String subStrEnd = ",\"tvCount\":";
 
     /**
-     * Simply use Hook's default constructor.
+     * Default constructor. Same as Hook(String query).
+     *
+     * @see Hook
      *
      * @param query String to search for.
      */
-    public RottenTomatoes(String query) {
+    RottenTomatoes(String query) {
         super(query);
     }
 
@@ -92,7 +102,7 @@ public class RottenTomatoes extends Hook {
 
         // try to invoke all search threads at once
         try {
-            List<Future<SearchResult>> futures = service.invokeAll(callables);
+            service.invokeAll(callables);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
