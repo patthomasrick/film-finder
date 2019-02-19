@@ -130,10 +130,10 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
     <td class="colOne"><code><span class="memberNameLink"><a
-            href="../Search/SearchResult.html#SearchResult-java.lang.String-java.lang.String-java.util.TreeSet-java.util.HashMap-">SearchResult</a></span>(java.lang.String&nbsp;query,
+            href="../Search/SearchResult.html#SearchResult-java.lang.String-java.lang.String-java.util.TreeSet-java.util.HashMap-">SearchResult</a></span>(java.lang.String&nbsp;movie_title,
             java.lang.String&nbsp;queryUrl,
-            java.util.TreeSet&lt;java.lang.String&gt;&nbsp;availability,
-        java.util.HashMap&lt;java.lang.String,java.lang.String&gt;&nbsp;siteLinks)</code>
+        java.util.TreeSet&lt;java.lang.String&gt;&nbsp;availabilitySet,
+        java.util.HashMap&lt;java.lang.String,java.lang.String&gt;&nbsp;siteLinksMap)</code>
         <div class="block">Constructor.</div>
     </td>
 </tr>
@@ -210,17 +210,17 @@ extends java.lang.Object</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>SearchResult</h4>
-<pre>public&nbsp;SearchResult(java.lang.String&nbsp;query,
+    <pre>public&nbsp;SearchResult(java.lang.String&nbsp;movie_title,
                     java.lang.String&nbsp;queryUrl,
-                    java.util.TreeSet&lt;java.lang.String&gt;&nbsp;availability,
-                    java.util.HashMap&lt;java.lang.String,java.lang.String&gt;&nbsp;siteLinks)</pre>
+                    java.util.TreeSet&lt;java.lang.String&gt;&nbsp;availabilitySet,
+                    java.util.HashMap&lt;java.lang.String,java.lang.String&gt;&nbsp;siteLinksMap)</pre>
     <div class="block">Constructor.</div>
     <dl>
         <dt><span class="paramLabel">Parameters:</span></dt>
-        <dd><code>query</code> - The movie's title</dd>
+        <dd><code>movie_title</code> - The movie's title</dd>
         <dd><code>queryUrl</code> - The movie's URL on a streaming platform</dd>
-        <dd><code>availability</code> - The movie's availability on a streaming platform</dd>
-        <dd><code>siteLinks</code> - Mapping of platform name to link</dd>
+        <dd><code>availabilitySet</code> - The movie's availabilitySet on a streaming platform</dd>
+        <dd><code>siteLinksMap</code> - Mapping of platform name to link</dd>
     </dl>
 </li>
 </ul>

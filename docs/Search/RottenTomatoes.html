@@ -142,7 +142,7 @@ extends <a href="../Search/Hook.html" title="class in Search">Hook</a></pre>
 </tr>
 <tr class="altColor">
     <td class="colOne"><code><span class="memberNameLink"><a
-            href="../Search/RottenTomatoes.html#RottenTomatoes-java.lang.String-">RottenTomatoes</a></span>(java.lang.String&nbsp;query)</code>
+            href="../Search/RottenTomatoes.html#RottenTomatoes-java.lang.String-">RottenTomatoes</a></span>(java.lang.String&nbsp;movie_title)</code>
         <div class="block">Simply use Hook's default constructor.</div>
     </td>
 </tr>
@@ -168,7 +168,7 @@ extends <a href="../Search/Hook.html" title="class in Search">Hook</a></pre>
     <td class="colFirst"><code>java.util.List&lt;<a href="../Search/SearchResult.html" title="class in Search">SearchResult</a>&gt;</code>
     </td>
     <td class="colLast"><code><span class="memberNameLink"><a
-            href="../Search/RottenTomatoes.html#search-java.lang.String-">search</a></span>(java.lang.String&nbsp;query)</code>
+            href="../Search/RottenTomatoes.html#search-java.lang.String-">search</a></span>(java.lang.String&nbsp;movie_title)</code>
 <div class="block">This is the hook's main way of giving data back to who requested the search.</div>
 </td>
 </tr>
@@ -207,11 +207,11 @@ extends <a href="../Search/Hook.html" title="class in Search">Hook</a></pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>RottenTomatoes</h4>
-    <pre>public&nbsp;RottenTomatoes(java.lang.String&nbsp;query)</pre>
+    <pre>public&nbsp;RottenTomatoes(java.lang.String&nbsp;movie_title)</pre>
     <div class="block">Simply use Hook's default constructor.</div>
     <dl>
         <dt><span class="paramLabel">Parameters:</span></dt>
-        <dd><code>query</code> - String to search for.</dd>
+        <dd><code>movie_title</code> - String to search for.</dd>
     </dl>
 </li>
 </ul>
@@ -229,7 +229,7 @@ extends <a href="../Search/Hook.html" title="class in Search">Hook</a></pre>
     <ul class="blockListLast">
 <li class="blockList">
 <h4>search</h4>
-    <pre>public&nbsp;java.util.List&lt;<a href="../Search/SearchResult.html" title="class in Search">SearchResult</a>&gt;&nbsp;search(java.lang.String&nbsp;query)</pre>
+    <pre>public&nbsp;java.util.List&lt;<a href="../Search/SearchResult.html" title="class in Search">SearchResult</a>&gt;&nbsp;search(java.lang.String&nbsp;movie_title)</pre>
     <div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a
             href="../Search/Hook.html#search-java.lang.String-">Hook</a></code></span></div>
 <div class="block">This is the hook's main way of giving data back to who requested the search.</div>
@@ -238,7 +238,7 @@ extends <a href="../Search/Hook.html" title="class in Search">Hook</a></pre>
     <dd><code><a href="../Search/Hook.html#search-java.lang.String-">search</a></code>&nbsp;in class&nbsp;<code><a
             href="../Search/Hook.html" title="class in Search">Hook</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>query</code> - string to enter into a webpage's search, such as "shrek" or "star wars"</dd>
+    <dd><code>movie_title</code> - string to enter into a webpage's search, such as "shrek" or "star wars"</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>ArrayList of all search results scraped from the webpage</dd>
 </dl>
