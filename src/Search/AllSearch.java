@@ -7,6 +7,15 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+/**
+ * AllSearch provides access to all implemented SearchHooks from one class. Given a query, it search all configured
+ * SearchHook implementations in parallel. The results are then returned in SearchResult form.
+ *
+ * @author Patrick Thomas
+ * @see RottenTomatoes
+ * @see Hook
+ * @see SearchResult
+ */
 public class AllSearch {
 
     // array of all possible platforms currently able to be returned
@@ -38,11 +47,6 @@ public class AllSearch {
         }
 
         service.shutdown();
-//
-//        // print all of the search results found
-//        for (SearchResult searchResult : allResults) {
-//            System.out.println(searchResult.toString());
-//        }
 
         return allResults;
     }

@@ -9,11 +9,13 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 /**
+ * Hooks are the overarching style of how data will be scraped from web pages. They are abstract and not meant to be
+ * used as-is.
+ *
  * @author Patrick Thomas
- * <p>
- * Hooks are the overarching style of how data will be scraped from webpages.
+ * @see SearchResult
  */
-public abstract class Hook implements Callable<List<SearchResult>> {
+abstract class Hook implements Callable<List<SearchResult>> {
     /**
      * String to search for when called.
      */
@@ -24,7 +26,7 @@ public abstract class Hook implements Callable<List<SearchResult>> {
      *
      * @param query String to search the implemented web page for.
      */
-    public Hook(String query) {
+    Hook(String query) {
         this.query = query;
     }
 
