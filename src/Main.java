@@ -30,7 +30,7 @@ public class Main {
             else {
                 resultsList = searcher.search(s); // get results and store them
                 for (SearchResult sr : resultsList) {
-                    System.out.printf("%s\n", sr.getMovieTitle());
+                    System.out.printf("%s, %d\n", sr.getMovieTitle(), sr.getYear());
                     for (String platform : AllSearch.allPlatforms) {
                         System.out.printf("\t%-12s\t%s\n", platform, sr.getSiteLink(platform));
                     }

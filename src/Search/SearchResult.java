@@ -1,10 +1,11 @@
 package Search;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeSet;
 
 /**
- * SearchResult provides a consise way to return a bundle of data from an associated search.
+ * SearchResult provides a concise way to return a bundle of data from an associated search.
  * <p>
  *
  * @author Patrick Thomas
@@ -17,18 +18,21 @@ public class SearchResult {
     /// Mapping of available site to link to respective site.
     HashMap<String, String> siteLinksMap;
     /// The movie's title, such as "Shrek II"
-    private String movieTitle;
+//    private String title;
+//    private int year;
+    private Map<MovieAttributes, String> movieAttributes = new HashMap();
     /// The URL returned from the search. This should go to the movie's web page on a site.
     private String queryUrl;
 
     /**
-     * Constructor.
      *
-     * @param movieTitle The movie's title
-     * @param queryUrl   The movie's URL on a streaming platform
+     * @param title
+     * @param year
+     * @param queryUrl
      */
-    SearchResult(String movieTitle, String queryUrl) {
-        this.movieTitle = movieTitle;
+    SearchResult(String title, int year, String queryUrl) {
+        this.movieAttributes.put(MovieAttributes.TITLE, title);
+        this.movieAttributes.put(MovieAttributes.YEAR, Integer.toString(year));
         this.queryUrl = queryUrl;
         this.availabilitySet = new TreeSet<>();
         this.siteLinksMap = new HashMap<>();
@@ -40,7 +44,11 @@ public class SearchResult {
      * @return String
      */
     public String getMovieTitle() {
-        return movieTitle;
+        return (String) this.movieAttributes.get(MovieAttributes.TITLE);
+    }
+
+    public int getYear() {
+        return Integer.parseInt(this.movieAttributes.get(MovieAttributes.YEAR));
     }
 
     /**
@@ -49,7 +57,7 @@ public class SearchResult {
      * @return String
      */
     public String getQueryUrl() {
-        return queryUrl;
+        return this.queryUrl;
     }
 
     /**
@@ -81,6 +89,10 @@ public class SearchResult {
      */
     @Override
     public String toString() {
-        return String.format("%s, %s", this.getMovieTitle(), this.getQueryUrl());
+        return String.format("%s (%d), %s", this.getMovieTitle(), this.getYear(), this.getQueryUrl());
+    }
+
+    public enum MovieAttributes {
+        TITLE, YEAR, DIRECTOR, GENRE, LENGTH
     }
 }

@@ -67,7 +67,7 @@ class RottenTomatoes extends Hook {
                     if (numOpeningBrackets == 0) {
                         endIndex = i;
                         jsonArray.add(jsonConcat.substring(startIndex, endIndex + 1));
-                        // System.out.println(jsonConcat.substring(startIndex, endIndex+1));
+//                        System.out.println(jsonConcat.substring(startIndex, endIndex+1));
                     }
                 }
             }
@@ -88,7 +88,7 @@ class RottenTomatoes extends Hook {
                 url = movieUrl + scanner.findInLine("[^\"]+");
                 // System.out.printf("%s, %d, %s\n", name, year, url);
 
-                outList.add(new SearchResult(String.format("%s (%d)", name, year), url));
+                outList.add(new SearchResult(name, year, url));
             }
         }
 
@@ -115,16 +115,16 @@ class RottenTomatoes extends Hook {
         private final static String linkSectionStart = "<div class=\"movie_links\">";
         private final static String linkSectionEnd = "function trackAffiliateEvent(affiliate) {";
 
-        SearchResult sr;
+        SearchResult result;
 
-        RottenTomatoesSpecificSearch(SearchResult sr) {
-            this.sr = sr; // intentionally use reference
+        RottenTomatoesSpecificSearch(SearchResult result) {
+            this.result = result; // intentionally use reference
         }
 
         @Override
         public SearchResult call() {
             // get the source of the website
-            String source = Hook.retrieveWebsite(this.sr.getQueryUrl());
+            String source = Hook.retrieveWebsite(this.result.getQueryUrl());
             BufferedReader reader = new BufferedReader(new StringReader(source));
             String line;
             boolean linkSectionStartFound = false;
@@ -157,13 +157,13 @@ class RottenTomatoes extends Hook {
             for (String link : foundLinks) {
                 for (String platform : AllSearch.allPlatforms) {
                     if (link.contains(platform)) {
-                        sr.availabilitySet.add(platform);
-                        sr.siteLinksMap.put(platform, link);
+                        result.availabilitySet.add(platform);
+                        result.siteLinksMap.put(platform, link);
                     }
                 }
             }
 
-            return sr;
+            return result;
         }
     }
 }
