@@ -21,6 +21,19 @@ public class AllSearch {
     // array of all possible platforms currently able to be returned
     public static final String[] allPlatforms = {"netflix", "amazon", "itunes", "fandangonow", "vudu"};
 
+    public enum Platform {
+        NETFLIX ("netflix"),
+        AMAZON ("amazon"),
+        ITUNES ("itunes"),
+        FANDANGONOW ("fandangonow"),
+        VUDU ("vudu");
+
+        String name;
+        Platform(String name) {
+            this.name = name;
+        }
+    }
+
     /**
      * Search all configured hooks for a movie.
      *
