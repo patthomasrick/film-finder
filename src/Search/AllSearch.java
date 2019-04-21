@@ -27,7 +27,7 @@ public class AllSearch {
      * @param query the search that a user enters, such as "james and the giant peach".
      * @return List of SearchResults.
      */
-    public List<SearchResult> search(String query) {
+    public static List<SearchResult> search(String query) {
         List<Hook> hookList = new ArrayList<>(); /// List for all callable hooks
         List<SearchResult> allResults = new ArrayList<>();
         ExecutorService service = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());

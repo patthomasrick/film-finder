@@ -19,7 +19,6 @@ public class Main {
         }
 
         Scanner reader = new Scanner(System.in); // reading from command line
-        AllSearch searcher = new AllSearch(); // create searcher
         List<SearchResult> resultsList; // list that results will be stored in
 
         while (true) {
@@ -28,7 +27,7 @@ public class Main {
             if (s.equals("quit"))
                 break; // quit if search is "quit"
             else {
-                resultsList = searcher.search(s); // get results and store them
+                resultsList = AllSearch.search(s); // get results and store them
                 for (SearchResult sr : resultsList) {
                     System.out.printf("%s\n", sr.getMovieTitle());
                     for (String platform : AllSearch.allPlatforms) {
