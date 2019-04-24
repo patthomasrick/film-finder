@@ -26,6 +26,7 @@ public class GUI extends JFrame {
     //	JPanel serviceComboPanel;
     JList<String> serviceList;
     DefaultListModel<String> listModel;
+    DefaultListModel<String> listModel2;
     JScrollPane servicePane;
     //	JPanel servicePanePanel;
     JLabel serviceTitle;
@@ -191,7 +192,8 @@ public class GUI extends JFrame {
         JLabel resText = new JLabel("The movie can be viewed on the following services:");
         resText.setFont(font1);
         resultsPanel.add(resText);
-        results = new JList<String>(listModel);
+        listModel2 = new DefaultListModel<String>();
+        results = new JList<String>(listModel2);
         results.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         results.setLayoutOrientation(JList.VERTICAL);
         results.setVisibleRowCount(-1);
@@ -333,8 +335,9 @@ public class GUI extends JFrame {
             if (results.isEmpty()) {
                 message.setText("Movie not found in any service that you are subscribed to");
             } else {
+                listModel2.clear();
                 for (SearchResult sr : results) {
-                    listModel.addElement(sr.getMovieTitle());
+                    listModel2.addElement(sr.getMovieTitle());
                 }
             }
         }
